@@ -56,3 +56,15 @@ QList<Move> &Moves::movesList()
 {
     return s_list;
 }
+
+Move Moves::find(QString what)
+{
+    QList<Move> listofmoves = movesList();
+    for (const auto& move : listofmoves){
+        if (move.m_name == what){
+            return move;
+        }
+    }
+    Move move;
+    return move;
+}

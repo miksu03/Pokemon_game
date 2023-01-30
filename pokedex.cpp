@@ -49,3 +49,14 @@ const QList<Pokemon> &Pokedex::pokemonList()
 {
     return m_list;
 }
+
+Pokemon Pokedex::find(QString what){
+        QList<Pokemon> listopokemons = pokemonList();
+        for (const auto& move : listopokemons){
+            if (move.m_name == what){
+                return move;
+            }
+        }
+        Pokemon move;
+        return move;
+    }

@@ -3,7 +3,7 @@
 #include <QtMath>
 
 // kerro tämä modifikaatorilla oikean saamiseksi
-int calculations::damage(double defense, double power, double attack, double level)
+int Calculations::damage(double defense, double power, double attack, double level)
 {
     double result = 0;
     auto randGen = QRandomGenerator::system();
@@ -20,69 +20,125 @@ int calculations::damage(double defense, double power, double attack, double lev
 return qRound(result);
 }
 
-int calculations::HP(double level, double baseHP){
+int Calculations::HP(double level, double baseHP){
     double result = (31 + 2 * baseHP + 31/4)+10 + level;
     return qRound(result);
 }
 
 // kerro tämä modifikaatorilla oikean saamiseksi
-int calculations::accuracy(int moveAccuracy, int accStage, int enemyAccStage){
+int Calculations::accuracy(int moveAccuracy, int accStage, int enemyEvasionStage){
     double result = 0;
-    double final = 0;
-    switch (accStage - enemyAccStage) {
+    double evasion = accStageModifier(enemyEvasionStage * -1);
+    result = moveAccuracy * accStageModifier(accStage) * evasion;
+    return qRound(result);
+}
+double Calculations::accStageModifier(int stage){
+    switch (stage) {
     case -6:
-            final = 0.333;
+            return 0.333;
         break;
     case -5:
-            final = 0.375;
+            return 0.375;
         break;
     case -4:
-            final = 0.43;
+            return 0.43;
         break;
     case -3:
-            final = 0.50;
+            return 0.50;
         break;
     case -2:
-            final = 0.60;
+            return 0.60;
         break;
     case -1:
-            final = 0.75;
+            return 0.75;
         break;
     case 0:
-            final = 1;
+            return 1;
         break;
     case 1:
-            final = 1.3333;
+            return 1.3333;
         break;
     case 2:
-            final = 1.6667;
+            return 1.6667;
         break;
     case 3:
-            final = 2;
+            return 2;
         break;
     case 4:
-            final = 2.3333;
+            return 2.3333;
         break;
     case 5:
-            final = 2.6667;
+            return 2.6667;
         break;
     case 6:
-            final = 3;
+            return 3;
         break;
     default:
-        if((accStage - enemyAccStage) < -6){
-            final = 0.333;
+        if((stage) < -6){
+            return 0.333;
         }
         else {
-            final = 3;
+            return 3;
         }
         break;
     }
-    result = moveAccuracy * final;
-    return qRound(result);
 }
-int speed (double level, double baseSpeed){
+
+double Calculations::speedStageModifier(int stage){
+    switch (stage) {
+    case -6:
+            return 0.25;
+        break;
+    case -5:
+            return 0.28;
+        break;
+    case -4:
+            return 0.33;
+        break;
+    case -3:
+            return 0.40;
+        break;
+    case -2:
+            return 0.50;
+        break;
+    case -1:
+            return 0.66;
+        break;
+    case 0:
+            return 1;
+        break;
+    case 1:
+            return 1.5;
+        break;
+    case 2:
+            return 2;
+        break;
+    case 3:
+            return 2.5;
+        break;
+    case 4:
+            return 3;
+        break;
+    case 5:
+            return 3.5;
+        break;
+    case 6:
+            return 4;
+        break;
+    default:
+        if((stage) < -6){
+            return 0.25;
+        }
+        else {
+            return 4;
+        }
+        break;
+    }
+}
+
+int Calculations::speed(double level, double baseSpeed, int speedStage){
     int returnable = level * 2 * baseSpeed;
     returnable = returnable/100;
-    return returnable + 5;
+    returnable += 5;
+    return qRound(returnable * speedStageModifier(speedStage));
 }

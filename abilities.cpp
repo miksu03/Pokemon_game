@@ -40,3 +40,13 @@ QList<Ability> &Abilities::abilitiesList()
 {
     return s_list;
 }
+Ability Abilities::find(QString what){
+        QList<Ability> listofabilities = abilitiesList();
+        for (const auto& move : listofabilities){
+            if (move.m_name == what){
+                return move;
+            }
+        }
+        Ability move;
+        return move;
+    }

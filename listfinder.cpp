@@ -121,8 +121,3 @@ void ListFinder::myAbilityFind(QString what){
     myAbility = sendThis;
     emit myAbilityChanged();
 }
-
-void ListFinder::mySelectedMoveIn(int index, QString what)
-{
-    mySelectedMoves[index] = what;
-}

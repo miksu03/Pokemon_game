@@ -16,6 +16,7 @@ class Abilities
 public:
     Abilities();
     QList<Ability>& abilitiesList();
+    Ability find(QString what);
 private:
     static QList<Ability> s_list;
 };

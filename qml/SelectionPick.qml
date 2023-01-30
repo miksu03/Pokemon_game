@@ -27,6 +27,7 @@ Item {
                 _abilityPicker.reset()
                 _movePicker.reset()
                 stackView.name = currentName
+                userSelection.mySelectedPokemon = currentName
                 currentAbilities = pokemonList.model.data(pokemonList.model.index(pokemonList.currentIndex, 0), SearchablePokemonListModel.Role.Abilities)
                 currentMoves = pokemonList.model.data(pokemonList.model.index(pokemonList.currentIndex, 0), SearchablePokemonListModel.Role.Moves)
             }
@@ -78,6 +79,7 @@ Item {
                     onClicked: {
                         pokemonList.currentName = model.name
                         pokemonList.currentIndex = index
+                        userSelection.mySelectedPokemon = model.name
                     }
                 }
             }
@@ -146,7 +148,9 @@ Item {
             text: qsTr("Play")
             checkable: false
             checked: false
-            onClicked: console.log(myClass.mySelectedMoves + myClass.mySelectedAbility)
+            onClicked: console.log("Pokemon: " + userSelection.mySelectedPokemon + "\n moves: "
+                                   + userSelection.mySelectedMoves + "\n Ability: "
+                                   + userSelection.mySelectedAbility)
         }
     }
     StackLayout {

@@ -45,6 +45,7 @@ class Moves
 public:
     Moves();
     QList<Move>& movesList();
+    Move find(QString what);
 private:
     static QList<Move> s_list;
     //std::optional<int> value;

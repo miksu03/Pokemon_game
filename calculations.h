@@ -2,13 +2,16 @@
 #define CALCULATIONS_H
 
 
-class calculations
+class Calculations
 {
 public:
     int damage(double defence, double power, double attack, double level);
     int HP(double level, double baseHP);
-    int accuracy(int moveAccuracy, int accStage, int enemyAccStage);
-    int speed (double level, double baseSpeed);
+    int accuracy(int moveAccuracy, int accStage, int enemyEvasionStage);
+    int speed (double level, double baseSpeed, int speedStage);
+private:
+    double accStageModifier(int stage);
+    double speedStageModifier(int stage);
 };
 
 #endif // CALCULATIONS_H

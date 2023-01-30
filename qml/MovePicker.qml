@@ -9,10 +9,10 @@ Item {
     function reset()
     {
         /* nollaa */
-        myClass.mySelectedMoveIn(0, "")
-        myClass.mySelectedMoveIn(1, "")
-        myClass.mySelectedMoveIn(2, "")
-        myClass.mySelectedMoveIn(3, "")
+        userSelection.mySelectedMoveIn(0, "")
+        userSelection.mySelectedMoveIn(1, "")
+        userSelection.mySelectedMoveIn(2, "")
+        userSelection.mySelectedMoveIn(3, "")
         moveButton1.text = "Click to add"
         moveButton2.text = "Click to add"
         moveButton3.text = "Click to add"
@@ -111,7 +111,7 @@ Item {
                            moveButton3.text != moveName.text &&
                             moveButton4.text != moveName.text){
                     text = moveName.text
-                        myClass.mySelectedMoveIn(0, moveName.text)
+                        userSelection.mySelectedMoveIn(0, moveName.text)
                     }
                 }
 
@@ -129,7 +129,7 @@ Item {
                            moveButton3.text != moveName.text &&
                             moveButton4.text != moveName.text){
                     text = moveName.text
-                        myClass.mySelectedMoveIn(1, moveName.text)
+                        userSelection.mySelectedMoveIn(1, moveName.text)
                     }
                 }
             }
@@ -145,7 +145,7 @@ Item {
                            moveButton3.text != moveName.text &&
                             moveButton4.text != moveName.text){
                     text = moveName.text
-                        myClass.mySelectedMoveIn(2, moveName.text)
+                        userSelection.mySelectedMoveIn(2, moveName.text)
                     }
                 }
             }
@@ -161,7 +161,7 @@ Item {
                            moveButton3.text != moveName.text &&
                             moveButton4.text != moveName.text){
                         text = moveName.text
-                        myClass.mySelectedMoveIn(3, moveName.text)
+                        userSelection.mySelectedMoveIn(3, moveName.text)
                     }
                 }
             }

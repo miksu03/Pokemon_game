@@ -18,6 +18,7 @@ class Pokedex
 public:
     Pokedex();
     const QList<Pokemon>& pokemonList();
+    Pokemon find(QString what);
 private:
     QList<Pokemon> m_list;
 };

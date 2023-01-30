@@ -4,6 +4,9 @@
 #include <QQmlContext>
 #include "searchablepokemonlistmodel.h"
 #include "listfinder.h"
+#include "userselected.h"
+#include <QDebug>
+#include "calculations.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,8 +22,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     ListFinder myClass;
+    UserSelected userSelection;
+    Calculations calc;
+    qDebug()<<calc.accuracy(100,0,3);
     qmlRegisterType<SearchablePokemonListModel>("local.pokemonlistmodel", 1, 0, "SearchablePokemonListModel");
     engine.rootContext()->setContextProperty("myClass", &myClass);
+    engine.rootContext()->setContextProperty("userSelection", &userSelection);
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

@@ -8,7 +8,7 @@ Item {
     function reset()
     {
         /* nollaa */
-        myClass.mySelectedAbility = ""
+        userSelection.mySelectedAbility = ""
         abilityButton.text = "Click to add"
     }
 
@@ -95,7 +95,7 @@ Item {
             text: qsTr("Tool Button")
             onClicked:{
                 text = abilityName.text
-                myClass.mySelectedAbility = abilityName.text
+                userSelection.mySelectedAbility = abilityName.text
             }
         }
     }
