@@ -7,6 +7,7 @@
 #include "userselected.h"
 #include <QDebug>
 #include "calculations.h"
+#include "userpokemon.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,11 +24,19 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     ListFinder myClass;
     UserSelected userSelection;
+    UserPokemon uPokemon;
+
     Calculations calc;
-    qDebug()<<calc.accuracy(100,0,3);
+    qDebug()<<calc.accuracy(100,0,0);
+    qDebug()<<calc.attackTime(calc.defaultStatCalculation(100,80),0);
+    qDebug()<<calc.damage(95,135,120,100);
+    qDebug()<<calc.HP(100,80);
+    myClass.myMoveFind("swords-dance");
+
     qmlRegisterType<SearchablePokemonListModel>("local.pokemonlistmodel", 1, 0, "SearchablePokemonListModel");
     engine.rootContext()->setContextProperty("myClass", &myClass);
     engine.rootContext()->setContextProperty("userSelection", &userSelection);
+    engine.rootContext()->setContextProperty("uPokmeon", &uPokemon);
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

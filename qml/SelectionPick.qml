@@ -148,9 +148,17 @@ Item {
             text: qsTr("Play")
             checkable: false
             checked: false
-            onClicked: console.log("Pokemon: " + userSelection.mySelectedPokemon + "\n moves: "
-                                   + userSelection.mySelectedMoves + "\n Ability: "
-                                   + userSelection.mySelectedAbility)
+            onClicked: {
+                if(userSelection.mySelectedMoves.length !== 0){
+                    uPokmeon.pokemonSelect(userSelection.mySelectedPokemon);
+                    for (var i = 0;userSelection.mySelectedMoves.length>i; i++){
+                        uPokmeon.moveSelect(userSelection.mySelectedMoves[i]);
+                    }
+                    uPokmeon.abilitySelect(userSelection.mySelectedAbility);
+                    stack.push("Match.qml");
+                }
+                //console.log(uPokmeon.m_userMoves[0].m_pp);
+            }
         }
     }
     StackLayout {

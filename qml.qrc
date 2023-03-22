@@ -7,5 +7,7 @@
         <file>qml/MovePicker.qml</file>
         <file>qml/AbilityPicker.qml</file>
         <file>qml/StatText.qml</file>
+        <file>qml/Match.qml</file>
+        <file>qml/PokemonMatchStats.qml</file>
     </qresource>
 </RCC>

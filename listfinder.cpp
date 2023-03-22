@@ -23,6 +23,7 @@ void ListFinder::myPokemonFind(QString what){
     myPokemon = sendThis;
     emit myPokemonChanged();
 }
+
 void ListFinder::myMoveFind(QString what){
     QString sendThis = "";
     const auto list = movesInList.movesList();
@@ -57,6 +58,7 @@ void ListFinder::myMoveFind(QString what){
                     sendThis += "short description: " +  effect.m_short_description + "\n";
                 }
             }
+
             sendThis += "type: " + move.m_type + "\n";
             sendThis += "damage class: "+ move.m_damage_class + "\n";
             sendThis += "accuracy: "+  QString::number(move.m_accuracy) + "\n";

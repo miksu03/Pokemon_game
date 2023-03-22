@@ -82,14 +82,14 @@ Item {
             height: parent.height * 0.60
             anchors.bottom: gridLayout.top
             contentWidth: 0
-        Text {
-            id: moveText
-            width: moveName.width*0.95
-            text: myClass ? myClass.myMove : "error"
-            font.pixelSize: 15
-            wrapMode: Text.WordWrap
-            clip: true
-        }
+            Text {
+                id: moveText
+                width: moveName.width*0.95
+                text: myClass ? myClass.myMove : "error"
+                font.pixelSize: 15
+                wrapMode: Text.WordWrap
+                clip: true
+            }
         }
 
         GridLayout {

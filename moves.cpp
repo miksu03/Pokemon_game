@@ -9,6 +9,7 @@ QList<Move> Moves::s_list;
 Moves::Moves()
 {
     QJsonDocument document = filereader::readFile();
+    s_list.clear();
     QJsonArray movesJson = document.object().value("moves").toArray();
     for (const auto& item : movesJson)
     {

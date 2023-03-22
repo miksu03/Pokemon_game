@@ -8,6 +8,7 @@ Pokedex::Pokedex()
 {
     QJsonDocument document = filereader::readFile();
     QJsonArray pokemonJson = document.object().value("pokedex").toArray();
+    m_list.clear();
     for (const auto& item : pokemonJson)
     {
         Pokemon currentPokemon;

@@ -2,8 +2,9 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
-// kerro tämä modifikaatorilla oikean saamiseksi
-int Calculations::damage(double defense, double power, double attack, double level)
+/* every stat is non base stat you need to use calculated stat.\n
+defenseSat is opponent stats and attack and level is your pokemon stat*/
+int Calculations::damage(double defenceStat, double powerOfMove, double attackStat, double level)
 {
     double result = 0;
     auto randGen = QRandomGenerator::system();
@@ -14,7 +15,7 @@ int Calculations::damage(double defense, double power, double attack, double lev
         criticalMultiplier = 1.5;
     }
     result = (2 * level) / 5;
-    result = (result * power * (attack / defense) + 2) / 50;
+    result = (result * powerOfMove * (attackStat / defenceStat) + 2) / 50;
     result = result * randomFactor * criticalMultiplier;
 
 return qRound(result);
@@ -136,9 +137,22 @@ double Calculations::speedStageModifier(int stage){
     }
 }
 
-int Calculations::speed(double level, double baseSpeed, int speedStage){
+int Calculations::defaultStatCalculation(double level, double baseSpeed, int speedStage){
     int returnable = level * 2 * baseSpeed;
     returnable = returnable/100;
     returnable += 5;
     return qRound(returnable * speedStageModifier(speedStage));
+}
+int Calculations::defaultStatCalculation(double level, double baseSpeed){
+    int returnable = level * 2 * baseSpeed;
+    returnable = returnable/100;
+    returnable += 5;
+    return returnable;
+}
+
+double Calculations::attackTime(int speedStat, int speedStage)
+{
+    double returnable = speedStat * speedStageModifier(speedStage);
+    returnable /= 50;
+    return 30/returnable;
 }

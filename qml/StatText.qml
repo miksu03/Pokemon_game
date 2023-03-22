@@ -17,5 +17,4 @@ Item {
         rightPadding: 12
         leftPadding: 12
     }
-
 }

@@ -16,6 +16,7 @@ SOURCES += \
         pokemonlistmodel.cpp \
         searchablepokemonlistmodel.cpp \
         status.cpp \
+        userpokemon.cpp \
         userselected.cpp
 
 RESOURCES += qml.qrc
@@ -42,4 +43,5 @@ HEADERS += \
     pokemonlistmodel.h \
     searchablepokemonlistmodel.h \
     status.h \
+    userpokemon.h \
     userselected.h
