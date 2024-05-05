@@ -25,7 +25,13 @@ public:
         emit ppChanged();
     }
     Q_INVOKABLE double speedTime(){
-        return m_calc.attackTime(m_calc.defaultStatCalculation(100,stats.m_speed), speedStage);
+        return m_calc.attackTime(m_calc.defaultStatCalculation(100,m_baseStats.m_speed), m_baseStats.speedStage);
+    }
+    BetterStatus m_baseStats;
+    int hp;
+    int maxHp;
+    QString pokemonName(){
+        return m_poke.m_name;
     }
 
 public slots:
@@ -37,22 +43,13 @@ public slots:
         m_pp.append(m_moves.find(what).m_pp);
         emit m_userMovesChanged();
     };
-    void attack(int attackIndex);
 
 private:
     //int ppGET(){return hp;}
     QList<int> m_pp;
     QList<int> ppGET() const {return m_pp;}
-    int maxHp;
     int maxHpGET(){return maxHp;}
-    int hp;
-    double usedHP;
-    int hpGET(){return hp - usedHP;}
-
-    int speedStage;
-    int evasionStage;
-    int accuracyStage;
-    int level;
+    int hpGET(){return hp;}
 
     Pokemon m_poke;
     Pokedex m_pokedex;
@@ -61,7 +58,6 @@ private:
     Calculations m_calc;
     Ability m_ability;
     Abilities m_abilities;
-    BetterStatus stats;
 
 signals:
     void pokemonChanged();

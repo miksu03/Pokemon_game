@@ -7,6 +7,7 @@ QT += quick quickcontrols2
 SOURCES += \
         abilities.cpp \
         ailments.cpp \
+        attack.cpp \
         calculations.cpp \
         filereader.cpp \
         listfinder.cpp \
@@ -36,6 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abilities.h \
     ailments.h \
+    attack.h \
     calculations.h \
     filereader.h \
     listfinder.h \

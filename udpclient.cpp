@@ -38,6 +38,8 @@ void UdpClient::readPendingDatagrams()
     // Read all pending datagrams
     while (socket->hasPendingDatagrams())
     {
+        Moves m_moves;
+        Sentable m_m_sended;
         // Get the size of the datagram
         qint64 size = socket->pendingDatagramSize();
 
@@ -57,17 +59,37 @@ void UdpClient::readPendingDatagrams()
             QJsonObject jsonObject = jsonDoc.object();
 
             // Check if the JSON object contains a "progress" key
-            if (jsonObject.contains("progress"))
+            if (jsonObject.contains("attacker"))
             {
-                // Get the value of the "progress" key
-                int progress = jsonObject.value("progress").toInt();
+                m_remotePokemon->pokemonSelect(jsonObject["attacker"].toString());
+                m_m_sended.attacker = m_remotePokemon;
+                emit remotePokemonChanged();
 
-                // Emit the progressBarValueChanged signal with the progress value
-                //m_remotePokemon->
-                setRemoteProgressBarValue(progress);
+                if (jsonObject.contains("attack")){
+                    m_m_sended.attack = m_moves.find(jsonObject["attack"].toString());
+                    m_m_sended.hit = jsonObject["hit"].toBool();
+                    m_m_sended.statchange = jsonObject["statchange"].toBool();
+                    m_m_sended.turns = jsonObject["turns"].toInt();
+                    m_m_sended.damage = jsonObject["damage"].toInt();
+                    m_m_sended.gainable = jsonObject["gainable"].toInt();
+                    m_m_sended.flinched = jsonObject["flinched"].toBool();
+                    attackCalc.attackFrom(m_m_sended, m_localPokemon);
+                    if (m_m_sended.flinched){
+                        lowerProgressBarLocal(m_localPokemon->speedTime());
+                    }
+                    lowerProgressBarRemote(m_remotePokemon->speedTime());
+                }
             }
         }
     }
+}
+
+void UdpClient::attackAttack(int attackIndex)
+{
+    QList<Move> attacks = m_localPokemon->m_userMovesGET();
+    table = attackCalc.attackTo(attacks[attackIndex], m_localPokemon, m_remotePokemon);
+    table.attacker = m_localPokemon;
+    sendJsonObject(table.toJson());
 }
 
 void UdpClient::setLocalPokemon(QObject *obj)
@@ -116,7 +138,7 @@ void UdpClient::timerEvent(QTimerEvent *event)
     oldValue++;
     if (oldValue > 100)
         oldValue = 0;
-    setRemoteProgressBarValue(oldValue);
+    //setRemoteProgressBarValue(oldValue);
 }
 
 void UdpClient::setRemoteProgressBarValue(double value)

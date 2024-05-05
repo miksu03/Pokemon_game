@@ -1,6 +1,8 @@
 #ifndef UDPCLIENT_H
 #define UDPCLIENT_H
 #include "userpokemon.h"
+#include "calculations.h"
+#include "attack.h"
 
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
@@ -19,7 +21,7 @@ class UdpClient: public QObject
     Q_PROPERTY(double remoteProgressBarValue READ remoteProgressBarValue NOTIFY remoteProgressBarValueChanged)
     Q_PROPERTY(double localProgressBarValue READ localProgressBarValue NOTIFY localProgressBarValueChanged)
     Q_PROPERTY(QObject* localPokemon READ localPokemon WRITE setLocalPokemon NOTIFY localPokemonChanged)
-    Q_PROPERTY(QObject* remotePokemon MEMBER m_remotePokemon CONSTANT)
+    Q_PROPERTY(QObject* remotePokemon READ remotePokemon NOTIFY remotePokemonChanged)
 public:
     UdpClient(QObject *parent = nullptr)
             : QObject(parent)
@@ -42,20 +44,25 @@ public:
     double remoteProgressBarValue() const;
     double localProgressBarValue() const;
     Q_INVOKABLE void lowerProgressBarLocal(double timeInSeconds);
+    Q_INVOKABLE void attackAttack(int attackIndex);
     void setLocalProgressBarValue(double value);
 signals:
     void localProgressBarValueChanged();
     void remoteProgressBarValueChanged();
     void localPokemonChanged();
+    void remotePokemonChanged();
 protected:
     void timerEvent(QTimerEvent *event) override;
 private slots:
     // Slot called when the UDP socket has pending datagrams to read
     void readPendingDatagrams();
 private:
+    Attack attackCalc;
+    Sentable table;
     UserPokemon* m_localPokemon;
     UserPokemon* m_remotePokemon;
     UserPokemon* localPokemon(){return m_localPokemon;}
+    UserPokemon* remotePokemon(){return m_remotePokemon;}
     void setLocalPokemon(QObject* obj);
     void setRemoteProgressBarValue(double value);
     QTimer remoteStamina;
@@ -70,6 +77,7 @@ private:
     bool m_firstPacketSent = false;
     QQmlApplicationEngine* engine;
     void lowerProgressBarRemote(double timeInSeconds);
+    Calculations m_calc;
 };
 
 #endif // UDPCLIENT_H

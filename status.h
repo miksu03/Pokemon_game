@@ -14,10 +14,18 @@ public:
 class BetterStatus{
 public:
     int m_attack;
+    int attackStage;
     int m_hp;
     int m_defence;
+    int defenceStage;
     int m_specialAttack;
+    int specialAttackStage;
     int m_specialDefense;
+    int specialDefenceStage;
     int m_speed;
+    int speedStage;
+    int evasionStage;
+    int accuracyStage;
+    int level;
 };
 #endif // STATUS_H

@@ -38,8 +38,8 @@ Column {
                 ProgressBar {
                     id:opponenthealt
                     from: 0
-                    to: 100
-                    value: 50
+                    to: udpclient.remotePokemon.maxHp
+                    value: udpclient.remotePokemon.hp
                     width: parent.width - opponenthealtNumber.width
                 }
                 Text {

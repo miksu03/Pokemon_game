@@ -6,6 +6,7 @@ class Calculations
 {
 public:
     int damage(double defenceStat, double powerOfMove, double attackStat, double level);
+    int maxDamage(double defenceStat, double powerOfMove, double attackStat, double level);
     int HP(double level, double baseHP);
     int accuracy(int moveAccuracy, int accStage, int enemyEvasionStage);
     int defaultStatCalculation (double level, double baseSpeed, int speedStage);

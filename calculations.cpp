@@ -18,7 +18,19 @@ int Calculations::damage(double defenceStat, double powerOfMove, double attackSt
     result = (result * powerOfMove * (attackStat / defenceStat) + 2) / 50;
     result = result * randomFactor * criticalMultiplier;
 
-return qRound(result);
+    return qRound(result);
+}
+
+int Calculations::maxDamage(double defenceStat, double powerOfMove, double attackStat, double level)
+{
+    double result = 0;
+    const double randomFactor = 1.0; /* [0.7 .. 1.0[ */
+    double criticalMultiplier = 1.5;
+    result = (2 * level) / 5;
+    result = (result * powerOfMove * (attackStat / defenceStat) + 2) / 50;
+    result = result * randomFactor * criticalMultiplier;
+
+    return qRound(result);
 }
 
 int Calculations::HP(double level, double baseHP){
@@ -26,12 +38,16 @@ int Calculations::HP(double level, double baseHP){
     return qRound(result);
 }
 
-// kerro tämä modifikaatorilla oikean saamiseksi
+
 int Calculations::accuracy(int moveAccuracy, int accStage, int enemyEvasionStage){
     double result = 0;
-    double evasion = accStageModifier(enemyEvasionStage * -1);
-    result = moveAccuracy * accStageModifier(accStage) * evasion;
-    return qRound(result);
+    if (moveAccuracy != 0){
+        double evasion = accStageModifier(enemyEvasionStage * -1);
+        result = moveAccuracy * accStageModifier(accStage) * evasion;
+        return qRound(result);
+    }else{
+        return 100;
+    }
 }
 double Calculations::accStageModifier(int stage){
     switch (stage) {
