@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls 6.3
 import QtQuick.Layouts 6.3
+import local.udpclient 1.0
 
 Item {
     id: item1
@@ -17,7 +18,7 @@ Item {
         contentWidth: 0
         Text {
             id: pokemonInfoText
-            text: qsTr("Text\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n onnistui")
+            text: userSelection.mySelectedPokemon + "\n" +  myClass.myPokemon //qsTr("Text\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n onnistui")
             font.pixelSize: 12
             wrapMode: Text.WordWrap
             clip: true
@@ -31,14 +32,15 @@ Item {
         columns:2
         rows:2
         Repeater {
-        model: userSelection.mySelectedMoves
-        delegate:
+            model: userSelection.mySelectedMoves
+            delegate:
             ToolButton {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                text:modelData
+                text:modelData + "\n pp " + uPokmeon.m_pp[index]
                 icon.color: "#ffffff"
-                onClicked:{console.log(index + userSelection.mySelectedMoves[index])}
+                onClicked:{console.log(userSelection.mySelectedMoves[index])
+                stats.testi(index)}
             }
         }
     }

@@ -154,5 +154,5 @@ double Calculations::attackTime(int speedStat, int speedStage)
 {
     double returnable = speedStat * speedStageModifier(speedStage);
     returnable /= 50;
-    return 30/returnable;
+    return 60/returnable;
 }

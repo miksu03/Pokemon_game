@@ -5,8 +5,8 @@ import QtQuick.Layouts
 Pane {
     Label {
         id: text1
-        x: 150
-        y: 60
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:20
         width: 350
         height: 60
         text: qsTr("Pokemon The Game")
@@ -16,6 +16,7 @@ Pane {
     Column
     {
         spacing: 10
+        topPadding: 60
         anchors.centerIn: parent
         MainWindowButton {
             id: _startButton

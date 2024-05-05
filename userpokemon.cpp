@@ -28,10 +28,12 @@ void UserPokemon::pokemonSelect(QString what)
         }
     }
     hp = m_calc.HP(level, stats.m_hp);
+    maxHp = hp;
 }
 
 void UserPokemon::attack(int attackIndex)
 {
+    //TODO:
      if (m_userMoves[attackIndex].m_damage_class == "special"){
         usedHP += m_calc.damage(stats.m_specialDefense, m_userMoves[attackIndex].m_power, stats.m_specialAttack, level);
      } else if (m_userMoves[attackIndex].m_damage_class == "physical"){

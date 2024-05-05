@@ -16,6 +16,7 @@ SOURCES += \
         pokemonlistmodel.cpp \
         searchablepokemonlistmodel.cpp \
         status.cpp \
+        udpclient.cpp \
         userpokemon.cpp \
         userselected.cpp
 
@@ -43,5 +44,6 @@ HEADERS += \
     pokemonlistmodel.h \
     searchablepokemonlistmodel.h \
     status.h \
+    udpclient.h \
     userpokemon.h \
     userselected.h

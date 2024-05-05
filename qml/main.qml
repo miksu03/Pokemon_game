@@ -7,6 +7,8 @@ Window {
     width: 640
     height: 480
     visible: true
+    minimumWidth: 533
+    minimumHeight: 400
     title: qsTr("Pokemon The Game")
 
     StackView {

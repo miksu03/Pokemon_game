@@ -6,17 +6,28 @@
 #include "moves.h"
 #include "calculations.h"
 #include "abilities.h"
-//#include <QVariant>
+#include <QVariant>
+#include <QMetaType>
 
 class UserPokemon :  public QObject
 {
     Q_OBJECT
-    //Q_PROPERTY(QVariant m_userMoves READ m_userMovesGET NOTIFY m_userMovesChanged)
-    Q_PROPERTY(int hp READ hpGET /*NOTIFY hpChanged*/)
-    Q_PROPERTY(QList<int> pp READ pp /*NOTIFY ppChanged*/)
+    Q_PROPERTY(QList<Move> m_userMovesGET READ m_userMovesGET NOTIFY m_userMovesChanged)
+    Q_PROPERTY(int hp READ hpGET NOTIFY hpChanged)
+    Q_PROPERTY(int maxHp READ maxHpGET NOTIFY pokemonChanged)
+    Q_PROPERTY(QList<int> m_pp READ ppGET NOTIFY ppChanged)
+
 public:
     UserPokemon();
-    //QVariant m_userMovesGET() const {return m_userMoves;};
+    QList<Move> m_userMovesGET() const {return m_userMoves;};
+    Q_INVOKABLE void pp_oneLover(int index){
+        m_pp[index]--;
+        emit ppChanged();
+    }
+    Q_INVOKABLE double speedTime(){
+        return m_calc.attackTime(m_calc.defaultStatCalculation(100,stats.m_speed), speedStage);
+    }
+
 public slots:
     void pokemonSelect(QString what);
     void abilitySelect(QString what){
@@ -27,17 +38,22 @@ public slots:
         emit m_userMovesChanged();
     };
     void attack(int attackIndex);
-    QList<int> pp(){return m_pp;}
+
 private:
+    //int ppGET(){return hp;}
+    QList<int> m_pp;
+    QList<int> ppGET() const {return m_pp;}
+    int maxHp;
+    int maxHpGET(){return maxHp;}
     int hp;
     double usedHP;
+    int hpGET(){return hp - usedHP;}
+
     int speedStage;
     int evasionStage;
     int accuracyStage;
     int level;
-    QList<int> m_pp;
-    int hpGET(){return hp;}
-    int ppGET(){return hp;}
+
     Pokemon m_poke;
     Pokedex m_pokedex;
     QList<Move> m_userMoves;
@@ -46,7 +62,11 @@ private:
     Ability m_ability;
     Abilities m_abilities;
     BetterStatus stats;
+
 signals:
+    void pokemonChanged();
+    void hpChanged();
+    void ppChanged();
     void m_userMovesChanged();
 };
 

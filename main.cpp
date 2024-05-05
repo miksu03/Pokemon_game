@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "calculations.h"
 #include "userpokemon.h"
+#include "udpclient.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,11 +29,13 @@ int main(int argc, char *argv[])
 
     Calculations calc;
     qDebug()<<calc.accuracy(100,0,0);
-    qDebug()<<calc.attackTime(calc.defaultStatCalculation(100,80),0);
+    qDebug()<<calc.attackTime(calc.defaultStatCalculation(100,200),0);
+    qDebug()<<calc.attackTime(calc.defaultStatCalculation(100,50),0);
     qDebug()<<calc.damage(95,135,120,100);
     qDebug()<<calc.HP(100,80);
     myClass.myMoveFind("swords-dance");
 
+    qmlRegisterType<UdpClient>("local.udpclient", 1, 0, "UdpClient");
     qmlRegisterType<SearchablePokemonListModel>("local.pokemonlistmodel", 1, 0, "SearchablePokemonListModel");
     engine.rootContext()->setContextProperty("myClass", &myClass);
     engine.rootContext()->setContextProperty("userSelection", &userSelection);
