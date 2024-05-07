@@ -13,7 +13,8 @@
 #include <QJsonObject>
 #include <QQuickItem>
 #include <QTimer>
-
+#include <QDebug>
+#include <QHostInfo>
 
 class UdpClient: public QObject
 {
@@ -39,7 +40,8 @@ public:
         port = 1234;
         startTimer(50);
     }
-    void setIpAddress(QHostAddress ip);
+    Q_INVOKABLE void setIpAddress(QHostAddress ip);
+    Q_INVOKABLE QString getIpAdress();
     void sendJsonObject(QJsonObject jsonObject);
     double remoteProgressBarValue() const;
     double localProgressBarValue() const;

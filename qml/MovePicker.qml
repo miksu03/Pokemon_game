@@ -1,6 +1,6 @@
 import QtQuick
-import QtQuick.Controls 6.3
-import QtQuick.Layouts 6.3
+import QtQuick.Controls
+import QtQuick.Layouts
 import local.pokemonlistmodel 1.0
 
 
@@ -39,7 +39,6 @@ Item {
                     height: Screen.height / 28
                     color: "#b3cccc"
                     Text {
-
                         text: modelData
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter

@@ -9,5 +9,6 @@
         <file>qml/StatText.qml</file>
         <file>qml/Match.qml</file>
         <file>qml/PokemonMatchStats.qml</file>
+        <file>qml/IPAddressSelecter.qml</file>
     </qresource>
 </RCC>

@@ -13,7 +13,6 @@ Item {
         height: parent.height
         ListView {
             id: pokemonList
-            anchors.bottom: parent.bottom
             spacing: 2
             clip: true
             width: parent.width
@@ -32,7 +31,7 @@ Item {
                 currentMoves = pokemonList.model.data(pokemonList.model.index(pokemonList.currentIndex, 0), SearchablePokemonListModel.Role.Moves)
             }
             onCurrentIndexChanged: updateCurrentSelection()
-
+            anchors{ bottom: parent.bottom}
             delegate: Item {
                 x: 5
                 property bool selectedItem: ListView.isCurrentItem
@@ -49,30 +48,23 @@ Item {
                     }
                 }
 
-                Row {
-                    id: row1
-
-                    Rectangle {
-
-                        width: pokemonList.width * 0.95
-                        height: Screen.height / 28
-                        color: "#b3cccc"
-                        Text {
-                            text: model.name
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: selectedItem
-                            onTextChanged: {
-                                if (selectedItem)
-                                {
-                                    pokemonList.currentName = name
-                                    pokemonList.updateCurrentSelection()
-                                }
+                Rectangle {
+                    width: pokemonList.width * 0.95
+                    height: Screen.height / 28
+                    color: "#b3cccc"
+                    Text {
+                        text: model.name
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: selectedItem
+                        onTextChanged: {
+                            if (selectedItem)
+                            {
+                                pokemonList.currentName = name
+                                pokemonList.updateCurrentSelection()
                             }
                         }
                     }
-
-                    spacing: 12
                 }
                 MouseArea{
                     anchors.fill: parent
@@ -109,7 +101,6 @@ Item {
             selectionColor: "#c6008dff"
             selectByMouse: true
             mouseSelectionMode: TextInput.SelectCharacters
-
         }
     }
 
@@ -155,7 +146,8 @@ Item {
                         uPokmeon.moveSelect(userSelection.mySelectedMoves[i]);
                     }
                     uPokmeon.abilitySelect(userSelection.mySelectedAbility);
-                    stack.push("Match.qml");
+                    //stack.push("Match.qml");
+                    stack.push("IPAddressSelecter.qml");
                 }
                 //console.log(uPokmeon.m_userMoves[0].m_pp);
             }

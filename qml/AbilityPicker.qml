@@ -14,7 +14,7 @@ Item {
 
     ListView {
         id: listAbility
-        anchors.bottom: parent.bottom
+        anchors{ bottom: parent.bottom}
         clip: true
         width: parent.width * 0.33
         height: parent.height

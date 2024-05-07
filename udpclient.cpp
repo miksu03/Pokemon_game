@@ -10,6 +10,17 @@ void UdpClient::setIpAddress(QHostAddress ip)
         }
 }
 
+QString UdpClient::getIpAdress(){
+    auto info = QHostInfo::fromName( QHostInfo::localHostName());
+    auto ips = info.addresses();
+    for (auto ip : ips){
+        if (ip.toIPv4Address()!=0){
+            return ip.toString();
+        }
+    }
+    return "-1";
+}
+
 void UdpClient::sendJsonObject(QJsonObject jsonObject)
 {
     if (!m_firstPacketSent) {
@@ -146,3 +157,4 @@ void UdpClient::setRemoteProgressBarValue(double value)
     m_remoteProgressBarValue = value;
     emit remoteProgressBarValueChanged();
 }
+Q_INVOKABLE

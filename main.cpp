@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     ListFinder myClass;
     UserSelected userSelection;
     UserPokemon uPokemon;
-
     Calculations calc;
     qDebug()<<calc.accuracy(100,0,0);
     qDebug()<<calc.attackTime(calc.defaultStatCalculation(100,200),0);
