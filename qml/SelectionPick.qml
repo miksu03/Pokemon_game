@@ -147,7 +147,7 @@ Item {
                     }
                     uPokmeon.abilitySelect(userSelection.mySelectedAbility);
                     //stack.push("Match.qml");
-                    stack.push("IPAddressSelecter.qml");
+                    stack.push("GamePage.qml");
                 }
                 //console.log(uPokmeon.m_userMoves[0].m_pp);
             }

@@ -49,3 +49,5 @@ HEADERS += \
     udpclient.h \
     userpokemon.h \
     userselected.h
+
+DISTFILES +=

@@ -5,9 +5,6 @@ import QtQuick.Layouts
 import local.udpclient 1.0
 
 Item {
-    UdpClient{
-        id: ip
-        }
     visible: true
     width: parent.width
     height: parent.height
@@ -19,7 +16,8 @@ Item {
         spacing: 10
 
         Label {
-            text: ip.getIpAdress()
+            id:ipAdressLabel
+            text: UdpClient.getIpAdress()
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Screen.height * 0.015
             font.bold: true
@@ -50,7 +48,14 @@ Item {
                 highlighted: true
                 text: qsTr("Go")
                 font.pixelSize: Screen.height * 0.015
-                onClicked: {stack.push("Match.qml");}
+                onClicked: {
+                    if (ipAdressLabel.text === UdpClient.getIpAdress())
+                    {
+                        if(textField.text.length != 0){
+                        ipAdressLabel.text = "waiting opponent\n" + ipAdressLabel.text}
+                        UdpClient.setIpAddress(textField.text)
+                    }
+                }
             }
         }
     }

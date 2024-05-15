@@ -23,12 +23,14 @@ class UdpClient: public QObject
     Q_PROPERTY(double localProgressBarValue READ localProgressBarValue NOTIFY localProgressBarValueChanged)
     Q_PROPERTY(QObject* localPokemon READ localPokemon WRITE setLocalPokemon NOTIFY localPokemonChanged)
     Q_PROPERTY(QObject* remotePokemon READ remotePokemon NOTIFY remotePokemonChanged)
+    Q_PROPERTY(bool ready READ ready WRITE setReady NOTIFY readyChanged FINAL)
 public:
     UdpClient(QObject *parent = nullptr)
             : QObject(parent)
             , m_localPokemon{nullptr}
             , m_remotePokemon{new UserPokemon()}
     {
+        qDebug() << "Instance!";
         // Create a UDP socket
         socket = new QUdpSocket(this);
 
@@ -38,9 +40,11 @@ public:
         // Set the IP address and port number of the remote host
         ipAddress = QHostAddress::LocalHost;
         port = 1234;
+        m_ready = false;
         startTimer(50);
     }
-    Q_INVOKABLE void setIpAddress(QHostAddress ip);
+    static QObject* getInstance(QQmlEngine *, QJSEngine *);
+    Q_INVOKABLE void setIpAddress(QString ip);
     Q_INVOKABLE QString getIpAdress();
     void sendJsonObject(QJsonObject jsonObject);
     double remoteProgressBarValue() const;
@@ -53,6 +57,7 @@ signals:
     void remoteProgressBarValueChanged();
     void localPokemonChanged();
     void remotePokemonChanged();
+    void readyChanged();
 protected:
     void timerEvent(QTimerEvent *event) override;
 private slots:
@@ -70,6 +75,9 @@ private:
     QTimer remoteStamina;
     QTimer localStamina;
     QUdpSocket *socket;
+    bool m_ready;
+    bool ready(){return m_ready;}
+    void setReady(bool readiness){m_ready = readiness;emit readyChanged();}
     static QHostAddress ipAddress;
     quint16 port;
     QMetaObject::Connection localStaminaConnection;

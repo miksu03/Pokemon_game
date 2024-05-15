@@ -1,10 +1,17 @@
 #include "udpclient.h"
 
 QHostAddress UdpClient::ipAddress;
-void UdpClient::setIpAddress(QHostAddress ip)
+QObject *UdpClient::getInstance(QQmlEngine *, QJSEngine *)
+{
+    return new UdpClient();
+}
+
+void UdpClient::setIpAddress(QString ip)
 {
     if (!m_firstPacketSent) {
             ipAddress = QHostAddress(ip);
+            table.attacker = m_localPokemon;
+            sendJsonObject(table.toJson());
         } else {
             qDebug() << "Cannot change IP address after the first packet has been sent!";
         }
@@ -72,9 +79,14 @@ void UdpClient::readPendingDatagrams()
             // Check if the JSON object contains a "progress" key
             if (jsonObject.contains("attacker"))
             {
-                m_remotePokemon->pokemonSelect(jsonObject["attacker"].toString());
-                m_m_sended.attacker = m_remotePokemon;
-                emit remotePokemonChanged();
+                if (m_remotePokemon->maxHp==0){
+                    m_remotePokemon->pokemonSelect(jsonObject["attacker"].toString());
+                    m_m_sended.attacker = m_remotePokemon;
+                    m_ready = true;
+                    sendJsonObject(table.toJson());
+                    emit readyChanged();
+                    emit remotePokemonChanged();
+                }
 
                 if (jsonObject.contains("attack")){
                     m_m_sended.attack = m_moves.find(jsonObject["attack"].toString());
@@ -105,6 +117,7 @@ void UdpClient::attackAttack(int attackIndex)
 
 void UdpClient::setLocalPokemon(QObject *obj)
 {
+    qDebug() << "setLocalPokemon!" << obj;
     m_localPokemon = qobject_cast<UserPokemon*>(obj);
 }
 
@@ -157,4 +170,3 @@ void UdpClient::setRemoteProgressBarValue(double value)
     m_remoteProgressBarValue = value;
     emit remoteProgressBarValueChanged();
 }
-Q_INVOKABLE

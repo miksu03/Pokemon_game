@@ -10,5 +10,6 @@
         <file>qml/Match.qml</file>
         <file>qml/PokemonMatchStats.qml</file>
         <file>qml/IPAddressSelecter.qml</file>
+        <file>qml/GamePage.qml</file>
     </qresource>
 </RCC>

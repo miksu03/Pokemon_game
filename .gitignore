@@ -1,5 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
+android*
 
 *~
 *.autosave
@@ -70,4 +71,4 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
+*.idx

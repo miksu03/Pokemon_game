@@ -4,13 +4,9 @@ import local.udpclient 1.0
 
 Column {
     width: parent.width
-    UdpClient{
-        id: udpclient
-        localPokemon: uPokmeon
-    }
     function testi(pp_index){
         if (userstamina.value <= 0 && uPokmeon.m_pp[pp_index] > 0){
-            udpclient.lowerProgressBarLocal(uPokmeon.speedTime())
+            UdpClient.lowerProgressBarLocal(uPokmeon.speedTime())
             uPokmeon.pp_oneLover(pp_index)
         }
     }
@@ -31,20 +27,20 @@ Column {
                 width: parent.width
                 from: 0
                 to: 100
-                value: udpclient.remoteProgressBarValue
+                value: UdpClient.remoteProgressBarValue
             }
             Row {
                 width: parent.width
                 ProgressBar {
                     id:opponenthealt
                     from: 0
-                    to: udpclient.remotePokemon.maxHp
-                    value: udpclient.remotePokemon.hp
+                    to: UdpClient.remotePokemon.maxHp
+                    value: UdpClient.remotePokemon.hp
                     width: parent.width - opponenthealtNumber.width
                 }
                 Text {
                     id:opponenthealtNumber
-                    text: udpclient.remotePokemon.hp
+                    text: UdpClient.remotePokemon.hp
                     font.pointSize: 20
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -68,22 +64,26 @@ Column {
                 width: parent.width
                 from: 0
                 to: 100
-                value: udpclient.localProgressBarValue
+                value: UdpClient.localProgressBarValue
             }
             Row {
                 width: parent.width
                 ProgressBar {
                     id:userHealt
                     from: 0
-                    to: udpclient.localPokemon.maxHp
-                    value: udpclient.localPokemon.hp
+                    to: UdpClient.localPokemon.maxHp
+                    value: UdpClient.localPokemon.hp
                     width: parent.width - userHealtNumber.width
                 }
                 Text {
                     id:userHealtNumber
-                    text: udpclient.localPokemon.hp
+                    text: UdpClient.localPokemon.hp
                     font.pointSize: 20
                     verticalAlignment: Text.AlignVCenter
+                }
+                Component.onCompleted: {
+                    console.log("UdpClient.localPokemon: " + UdpClient.localPokemon)
+                    console.log("UdpClient.localPokemon.hp: " + UdpClient.localPokemon.hp)
                 }
             }
         }

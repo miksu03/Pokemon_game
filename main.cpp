@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     qDebug()<<calc.HP(100,80);
     myClass.myMoveFind("swords-dance");
 
-    qmlRegisterType<UdpClient>("local.udpclient", 1, 0, "UdpClient");
+    qmlRegisterSingletonType<UdpClient>("local.udpclient", 1, 0, "UdpClient", &UdpClient::getInstance);
     qmlRegisterType<SearchablePokemonListModel>("local.pokemonlistmodel", 1, 0, "SearchablePokemonListModel");
     engine.rootContext()->setContextProperty("myClass", &myClass);
     engine.rootContext()->setContextProperty("userSelection", &userSelection);
